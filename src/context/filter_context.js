@@ -16,6 +16,12 @@ const initialState = {
   filtered_products: [],
   all_products: [],
   sort: "price-lowest",
+
+  filters: {
+    min_price: 0,
+    max_price: 0,
+    price: 0,
+  },
 };
 
 const FilterContext = React.createContext();
@@ -33,8 +39,24 @@ export const FilterProvider = ({ children }) => {
     const value = e.target.value;
     dispatch({ type: UPDATE_SORT, payload: value });
   };
+
+  const updateFilters = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    if (name === "price") {
+      value = Number(value);
+    }
+  };
+  const clearFilters = () => {};
+
+  useEffect(() => {
+    dispatch({ type: SORT_PRODUCTS });
+  }, [products, state.sort]);
   return (
-    <FilterContext.Provider value={{ ...state, updateSort }}>
+    <FilterContext.Provider
+      value={{ ...state, updateSort, updateFilters, clearFilters }}
+    >
       {children}
     </FilterContext.Provider>
   );
