@@ -10,12 +10,17 @@ import { useUserContext } from "../context/user_context";
 
 const Nav = () => {
   const { openSidebar } = useProductsContext();
+  const { myUser } = useUserContext();
   return (
     <NavContainer>
       <div className="nav-center">
         <div className="nav-header">
           <Link to="/">
-            <img src={logo} alt="react-ecom"></img>
+            <img
+              src="https://img.icons8.com/color/512/old-vmware-logo.png"
+              style={{ height: "50px" }}
+              alt="react-ecom"
+            ></img>
           </Link>
           <button className="nav-toggle" type="button" onClick={openSidebar}>
             <FaBars />
@@ -29,6 +34,11 @@ const Nav = () => {
               </li>
             );
           })}
+          {myUser && (
+            <li>
+              <Link to="/checkout">Checkout</Link>
+            </li>
+          )}
         </ul>
         <CartButtons />
       </div>

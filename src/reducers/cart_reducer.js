@@ -4,6 +4,7 @@ import {
   COUNT_CART_TOTALS,
   REMOVE_CART_ITEM,
   TOGGLE_CART_ITEM_AMOUNT,
+  CART_CHECKOUT,
 } from "../actions";
 
 const cart_reducer = (state, action) => {
@@ -77,6 +78,10 @@ const cart_reducer = (state, action) => {
       }
     );
     return { ...state, total_items, total_amount };
+  }
+
+  if (action.type === CART_CHECKOUT) {
+    console.log("Checkout");
   }
   throw new Error(`No Matching "${action.type}" - action type`);
 };

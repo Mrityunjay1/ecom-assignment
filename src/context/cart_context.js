@@ -6,6 +6,7 @@ import {
   TOGGLE_CART_ITEM_AMOUNT,
   CLEAR_CART,
   COUNT_CART_TOTALS,
+  CART_CHECKOUT,
 } from "../actions";
 
 const getLocalStorage = () => {
@@ -44,13 +45,24 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: CLEAR_CART });
   };
 
+  const checkout = () => {
+    dispatch({ type: CART_CHECKOUT });
+  };
+
   useEffect(() => {
     dispatch({ type: COUNT_CART_TOTALS });
     localStorage.setItem("cart", JSON.stringify(state.cart));
   }, [state.cart]);
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, removeItem, clearCart, toggleAmount }}
+      value={{
+        ...state,
+        addToCart,
+        removeItem,
+        clearCart,
+        toggleAmount,
+        checkout,
+      }}
     >
       {children}
     </CartContext.Provider>

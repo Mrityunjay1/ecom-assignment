@@ -29,6 +29,9 @@ function App() {
           <Cart />
         </Route>
         <Route path="/products/:id" children={<SingleProduct />} />
+        <PrivateRoute exact path="/checkout">
+          <Checkout />
+        </PrivateRoute>
         <Route path="*" exact>
           <Error />
         </Route>
